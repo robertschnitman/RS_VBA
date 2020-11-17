@@ -40,7 +40,7 @@ End Function
 ' Function: SLOOKUP()
 ' Description: Lookup a value based on a row value and column name.
 
-Function SLOOKUP(id_lookup As Range, column_lookup As String, data_range As Range, Optional column_match_type As Integer = 0)
+Function SLOOKUP(id_lookup As String, column_lookup As String, data_range As Range, Optional column_match_type As Integer = 0)
     ' NOTES:
     '   1. All inputs take in Ranges except column_lookup as inputs so that we can use cell references.
     '       1. column_lookup can be a cell reference if and only if the cell reference points to a string.

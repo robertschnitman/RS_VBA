@@ -1,5 +1,7 @@
 Attribute VB_Name = "funs_string"
 ' Custom Excel functions for handling strings.
+'   FIND OUT HOW TO PRINT DESCRIPTIONS OF CUSTOM FUNCTIONS
+'     https://stackoverflow.com/questions/4262421/how-to-put-a-tooltip-on-a-user-defined-function
 
 ' Author: Robert Schnitman
 ' Date: 2020-11-10
@@ -124,6 +126,7 @@ Function FIRSTNAME(cell As String, Optional name_order As Integer = 1)
     '   1. name_order options
     '       1 = First Name Last Name
     '       2 = Last Name, First Name
+    '   2. Reverse-order case assumes that there is a comma.
     
     ' Remove extraneous spaces (left and right sides).
     Dim cell2 As String
@@ -192,7 +195,7 @@ Function FIRSTNAME(cell As String, Optional name_order As Integer = 1)
             
         End If
         
-    ' Reverse order
+    ' Reverse order--ASSUMES THAT THERE IS A COMMA.
     ElseIf name_order = 2 Then
         
         Dim out As String
@@ -204,7 +207,7 @@ Function FIRSTNAME(cell As String, Optional name_order As Integer = 1)
             
         Else
         
-            FIRSTNAME = Trim(out) ' FINDAFTER(out, " ")
+            FIRSTNAME = Trim(out)
             
         End If
     
@@ -277,4 +280,63 @@ Function LASTNAME(cell As String, Optional name_order As Integer = 1)
         
     End If
 
+End Function
+
+' Author: Robert Schnitman
+' Date: 2020-11-13
+' Function: STRINGLIKE()
+' Description: Determine whether a string meets at least one given pattern.
+
+Function STRINGLIKE(cell As String, ParamArray args() As Variant)
+    ' ParamArray allows us to give STRINGLIKE() the ability to have multiple inputs without naming them (https://docs.microsoft.com/en-us/office/vba/language/concepts/getting-started/understanding-parameter-arrays).
+    
+    ' Source of table below: https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/how-to-match-a-string-against-a-pattern
+    'Characters in pattern   Matches in string
+    '---------------------   -----------------
+    '?                       Any single character.
+    '*                       Zero or more characters.
+    '#                       Any single digit (0-9).
+    '[ charlist ]            Any single character in charlist.
+    '[ !charlist ]           Any single character not in charlist.
+    
+    ' e.g STRINGLIKE("Robert Schnitman", "Robert*") ' prints TRUE.
+    
+    Dim i As Integer   ' To set up the loop
+    Dim patt As String ' Declare the pattern to be a string.
+    
+    ' For each parameter given...
+    For i = LBound(args) To UBound(args)
+    
+        ' Pass the parameter argument into patt.
+        patt = args(i)
+    
+        ' Try to detect if the cell matches the pattern denoted by patt.
+        detect = cell Like patt
+        
+        ' If we detect a pattern match, output TRUE and exit the loop.
+        If detect = True Then
+        
+            output = detect ' True
+            
+            Exit For
+        
+        ' If we don't find a match for the first argument, keep going until the last given parameter.
+        ElseIf detect = False And i < UBound(args) Then
+        
+            GoTo NextItem
+        
+        ' If on the last parameter we do not find a pattern match, output FALSE.
+        ElseIf output = False And i = UBound(args) Then
+        
+            output = detect ' False
+            
+        End If
+        
+NextItem:
+        
+    Next i
+        
+    ' The output of the function should be a Boolean value (TRUE/FALSE).
+    STRINGLIKE = output
+    
 End Function
