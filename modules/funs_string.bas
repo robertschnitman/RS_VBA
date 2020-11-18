@@ -1,7 +1,5 @@
 Attribute VB_Name = "funs_string"
 ' Custom Excel functions for handling strings.
-'   FIND OUT HOW TO PRINT DESCRIPTIONS OF CUSTOM FUNCTIONS
-'     https://stackoverflow.com/questions/4262421/how-to-put-a-tooltip-on-a-user-defined-function
 
 ' Author: Robert Schnitman
 ' Date: 2020-11-10
@@ -9,6 +7,8 @@ Attribute VB_Name = "funs_string"
 ' Description: In a cell, replace a string with another.
 
 Function FINDREPLACE(cell As String, string_old As String, string_new As String)
+Attribute FINDREPLACE.VB_Description = "Find and replace a character(s)."
+Attribute FINDREPLACE.VB_ProcData.VB_Invoke_Func = " \n23"
     
     ' VBA's Replace() is NOT like Excel's REPLACE()!!! It is simpler.
     FINDREPLACE = Replace(cell, string_old, string_new)
@@ -21,6 +21,8 @@ End Function
 ' Description: In a cell, remove a specified character(s).
 
 Function FINDREMOVE(cell As String, char As String)
+Attribute FINDREMOVE.VB_Description = "Remove a character(s)."
+Attribute FINDREMOVE.VB_ProcData.VB_Invoke_Func = " \n23"
 
     FINDREMOVE = FINDREPLACE(cell, char, "")
 
@@ -32,6 +34,8 @@ End Function
 ' Description: In a cell, return the text before the first specified character(s).
 
 Function FINDBEFORE(cell As String, char As String)
+Attribute FINDBEFORE.VB_Description = "Find the substring before a specified character(s)"
+Attribute FINDBEFORE.VB_ProcData.VB_Invoke_Func = " \n23"
 
     ' VBA's Instr() is like Excel's Find().
     char_pos = InStr(cell, char)
@@ -61,6 +65,8 @@ End Function
 ' Description: In a cell, return the text after the first specified character(s).
 
 Function FINDAFTER(cell As String, char As String)
+Attribute FINDAFTER.VB_Description = "Find the substring after a specified character(s)"
+Attribute FINDAFTER.VB_ProcData.VB_Invoke_Func = " \n23"
     
     ' VBA's Instr() is like Excel's Find().
     char_pos = InStr(cell, char)
@@ -89,6 +95,8 @@ End Function
 ' Description: In a cell, return the text BETWEEN specified characters.
 
 Function FINDBETWEEN(cell As String, char_start As String, char_end As String)
+Attribute FINDBETWEEN.VB_Description = "Find the substring between two characters"
+Attribute FINDBETWEEN.VB_ProcData.VB_Invoke_Func = " \n23"
 
     ' Where does char_start start?
     num_start = InStr(cell, char_start)
@@ -122,11 +130,14 @@ End Function
 ' Description: Get the first name (and middle name if applicable).
 
 Function FIRSTNAME(cell As String, Optional name_order As Integer = 1)
+Attribute FIRSTNAME.VB_Description = "Find the first name of a name string."
+Attribute FIRSTNAME.VB_ProcData.VB_Invoke_Func = " \n23"
     ' NOTES:
     '   1. name_order options
     '       1 = First Name Last Name
     '       2 = Last Name, First Name
     '   2. Reverse-order case assumes that there is a comma.
+    '   3. Be careful of compound last names (e.g. Del Mul, Van Helsing, etc.)
     
     ' Remove extraneous spaces (left and right sides).
     Dim cell2 As String
@@ -228,9 +239,12 @@ End Function
 ' Description: Get the last name of a person.
 
 Function LASTNAME(cell As String, Optional name_order As Integer = 1)
+Attribute LASTNAME.VB_Description = "Find the last name of a name string."
+Attribute LASTNAME.VB_ProcData.VB_Invoke_Func = " \n23"
     '   1. name_order options
     '       1 = First Name Last Name
     '       2 = Last Name, First Name
+    '   2. Be careful of compound last names (e.g. Del Mul, Van Helsing, etc.)
 
     ' Regular order
     If name_order = 1 Then
@@ -283,21 +297,23 @@ Function LASTNAME(cell As String, Optional name_order As Integer = 1)
 End Function
 
 ' Author: Robert Schnitman
-' Date: 2020-11-13
+' Date: 2020-11-16
 ' Function: STRINGLIKE()
 ' Description: Determine whether a string meets at least one given pattern.
 
 Function STRINGLIKE(cell As String, ParamArray args() As Variant)
+Attribute STRINGLIKE.VB_Description = "Detect a pattern-match for a string."
+Attribute STRINGLIKE.VB_ProcData.VB_Invoke_Func = " \n23"
     ' ParamArray allows us to give STRINGLIKE() the ability to have multiple inputs without naming them (https://docs.microsoft.com/en-us/office/vba/language/concepts/getting-started/understanding-parameter-arrays).
     
     ' Source of table below: https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/how-to-match-a-string-against-a-pattern
-    'Characters in pattern   Matches in string
-    '---------------------   -----------------
-    '?                       Any single character.
-    '*                       Zero or more characters.
-    '#                       Any single digit (0-9).
-    '[ charlist ]            Any single character in charlist.
-    '[ !charlist ]           Any single character not in charlist.
+    ' Characters in pattern   Matches in string
+    ' ---------------------   -----------------
+    ' ?                       Any single character.
+    ' *                       Zero or more characters.
+    ' #                       Any single digit (0-9).
+    ' [ charlist ]            Any single character in charlist.
+    ' [ !charlist ]           Any single character not in charlist.
     
     ' e.g STRINGLIKE("Robert Schnitman", "Robert*") ' prints TRUE.
     

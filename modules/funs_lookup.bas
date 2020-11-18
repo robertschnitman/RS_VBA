@@ -3,44 +3,12 @@ Attribute VB_Name = "funs_lookup"
 
 ' AUTHOR: Robert Schnitman
 ' Date: 2020-11-12
-' Function: INDEXMATCH()
-' Description: Simplification of INDEX(..., MATCH(...), MATCH(...)) (Index-Matching).
-
-Function INDEXMATCH(id_lookup As Range, column_lookup As Range, id_range As Range, data_range As Range)
-    ' NOTES:
-    '   1. data_range and id_range are required to be Ranges so that we can input ranges into this function.
-    '   2. id_lookup and column_lookup are declared as Ranges so that we can use cell references.
-    '   3. This function assumes that the column headers are in Row 1 of data_range.
-    
-    ' The Index() function requires an Array as an input; however, we need to be able to select a range of data.
-    ' So, we convert the data_range into an Array for Index() to work.
-    Dim myarray As Variant
-    myarray = data_range
-    
-    With Application.WorksheetFunction
-    
-        ' The 2nd and 3rd inputs of Index (row number and column number, respectively) are required to be of Double type.
-        Dim r, c As Double
-        r = .Match(id_lookup, id_range, 0) ' 0 indicates an exact match.
-        c = .Match(column_lookup, data_range.Rows(1), 0) ' ASSUMES THE COLUMN HEADERS ARE IN ROW 1 OF THE DATA RANGE.
-    
-        ' Output
-        INDEXMATCH = .Index(myarray, r, c)
-        
-        ' Example: I:\Robert\Automation\Excel\Tests\INDEXMATCH.xlsx
-        ' =+INDEXMATCH(Test_Data!$A$1:$E$6,Test_Data!$C$1:$C$6,$C2,Test_Data!B$1)
-        ' =+INDEXMATCH(data, SSN_column, SSN_cell_to_lookup, column_name_to_lookup)
-    
-    End With
-    
-End Function
-
-' AUTHOR: Robert Schnitman
-' Date: 2020-11-12
 ' Function: SLOOKUP()
 ' Description: Lookup a value based on a row value and column name.
 
 Function SLOOKUP(id_lookup As String, column_lookup As String, data_range As Range, Optional column_match_type As Integer = 0)
+Attribute SLOOKUP.VB_Description = "Lookup a value by row value and column name."
+Attribute SLOOKUP.VB_ProcData.VB_Invoke_Func = " \n20"
     ' NOTES:
     '   1. All inputs take in Ranges except column_lookup as inputs so that we can use cell references.
     '       1. column_lookup can be a cell reference if and only if the cell reference points to a string.
@@ -49,6 +17,19 @@ Function SLOOKUP(id_lookup As String, column_lookup As String, data_range As Ran
     '       1.  1 = Less Than = find the largest value less than or equal to query_column.
     '       2.  0 = Exact     = find the value exactly equal to query_column.
     '       3. -1 = More Than = find the smallest value greater than or equal to query_column.
+    '   4. Can use pattern values.
+    '
+    '       Source of table below: https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/how-to-match-a-string-against-a-pattern
+    '
+    '       Characters in pattern   Matches in string
+    '       ---------------------   -----------------
+    '       ?                       Any single character.
+    '       *                       Zero or more characters.
+    '       #                       Any single digit (0-9).
+    '       [ charlist ]            Any single character in charlist.
+    '       [ !charlist ]           Any single character not in charlist.
+    '
+    '       +SLOOKUP(C2, "Contrib*", A1:K6)
 
     With Application.WorksheetFunction
 
