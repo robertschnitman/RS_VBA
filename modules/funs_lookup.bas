@@ -14,9 +14,9 @@ Attribute SLOOKUP.VB_ProcData.VB_Invoke_Func = " \n20"
     '       1. column_lookup can be a cell reference if and only if the cell reference points to a string.
     '   2. This function assumes that the column headers are in Row 1 of the data range.
     '   3. The match_type input is based on the match type input for MATCH():
-    '       1.  1 = Less Than = find the largest value less than or equal to query_column.
-    '       2.  0 = Exact     = find the value exactly equal to query_column.
-    '       3. -1 = More Than = find the smallest value greater than or equal to query_column.
+    '       1.  1 = Less Than = find the largest value less than or equal to column_lookup.
+    '       2.  0 = Exact     = find the value exactly equal to column_lookup.
+    '       3. -1 = More Than = find the smallest value greater than or equal to column_lookup.
     '   4. Can use pattern values.
     '
     '       Source of table below: https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/how-to-match-a-string-against-a-pattern
@@ -37,13 +37,12 @@ Attribute SLOOKUP.VB_ProcData.VB_Invoke_Func = " \n20"
         ' So, we convert the data_range into an Array for Index() to work.
         Dim myarray As Variant
         myarray = data_range
-        
 
         ' Finding row and column numbers for INDEX().
 
         ' Set up variables.
         Dim i, col_count As Integer ' For the loop.
-        Dim r, c As Double ' Row and column numbers to be obtained from XMATCH().
+        Dim r, c As Double ' Row and column numbers to be obtained from MATCH(), which have to be Double type.
         
         col_count = data_range.Columns.Count
         
@@ -80,4 +79,18 @@ NextCol2:
         
     End With
 
+End Function
+
+' Author: Robert Schnitman
+' Date 2020-11-20
+' Function: SMATCH()
+' Description: Determine which cell in a range matches a given pattern. The equivalent of XMATCH(pattern, range, 2) or MATCH(pattern, range, 0).
+
+Function SMATCH(pattern As String, myrange As Range)
+Attribute SMATCH.VB_Description = "Determine which cell in a range matches a given pattern. The equivalent of XMATCH(pattern, range, 2) or MATCH(pattern, range, 0)."
+Attribute SMATCH.VB_ProcData.VB_Invoke_Func = " \n20"
+
+    ' https://support.microsoft.com/en-us/office/xmatch-function-d966da31-7a6b-4a13-a1c6-5a33ed6a0312
+    SMATCH = Application.WorksheetFunction.XMatch(pattern, myrange, 2) ' 2 = Wildcard match
+    
 End Function
