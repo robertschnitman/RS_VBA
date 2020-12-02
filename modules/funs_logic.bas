@@ -8,7 +8,7 @@ Attribute VB_Name = "funs_logic"
 
 Function ISLEN0(cell As String)
 Attribute ISLEN0.VB_Description = "Test whether a cell has no characters. Similar to ISBLANK()."
-Attribute ISLEN0.VB_ProcData.VB_Invoke_Func = " \n23"
+Attribute ISLEN0.VB_ProcData.VB_Invoke_Func = " \n21"
 
     ' We typically have to test whether there is a blank cell in our client's file, which we do by using LEN(cell) = 0.
     ISLEN0 = (Len(cell) = 0)
@@ -22,7 +22,7 @@ End Function
 
 Function IFBLANK(cell As String, value_if_true, value_if_false)
 Attribute IFBLANK.VB_Description = "Similar to IF(), but performs an action depending on whether a cell is blank or not."
-Attribute IFBLANK.VB_ProcData.VB_Invoke_Func = " \n23"
+Attribute IFBLANK.VB_ProcData.VB_Invoke_Func = " \n21"
 
     If ISLEN0(cell) = True Then
     
@@ -45,7 +45,7 @@ End Function
 
 Function SKIPBLANK(cell As String, value_if_nonblank)
 Attribute SKIPBLANK.VB_Description = "Perform an action if a cell is non-blank; otherwise, output blank."
-Attribute SKIPBLANK.VB_ProcData.VB_Invoke_Func = " \n23"
+Attribute SKIPBLANK.VB_ProcData.VB_Invoke_Func = " \n21"
 
     If ISLEN0(cell) = True Then
     
@@ -68,7 +68,7 @@ End Function
 
 Function DOIF(condition As Boolean, value_if_true)
 Attribute DOIF.VB_Description = "Perform an action only if an action is met; otherwise, output blank."
-Attribute DOIF.VB_ProcData.VB_Invoke_Func = " \n23"
+Attribute DOIF.VB_ProcData.VB_Invoke_Func = " \n21"
 
     If condition = True Then
     
@@ -81,5 +81,26 @@ Attribute DOIF.VB_ProcData.VB_Invoke_Func = " \n23"
     End If
     
     DOIF = output
+
+End Function
+
+' Author: Robert Schnitman
+' Date: 2020-11-30
+' Function: ISMAC()
+' Description: Test whether the user's computer is a Mac.
+
+Function ISMAC()
+
+    If Mac Then
+    
+        output = True
+        
+    Else
+    
+        output = False
+        
+    End If
+    
+    ISMAC = output
 
 End Function

@@ -15,7 +15,8 @@ Sub RegisterUDF_all()
 
     ' 1. Create arrays of function names and descriptions for each module.
     ' funs_text
-    m_names_text = Array("FINDREPLACE", "FINDREMOVE", "FINDBEFORE", "FINDAFTER", "FINDBETWEEN", "FIRSTNAME", "LASTNAME", "TEXTLIKE", "TEXTSTRIPWS", "TEXTINSERT", "TEXTREVERSE", "TEXTCOMPARE", "TEXTJOINR", "TRIML", "TRIMR", "TRIMLR")
+    m_names_text = Array("FINDREPLACE", "FINDREMOVE", "FINDBEFORE", "FINDAFTER", "FINDBETWEEN", "FIRSTNAME", "LASTNAME", "TEXTLIKE", "TEXTSTRIPWS", "TEXTINSERT", "TEXTREVERSE", "TEXTCOMPARE", "TEXTJOINR", "TRIML", "TRIMR", "TRIMLR", _
+	"RXLIKE", "RXREPLACE", "RXGET", "RXGETALL")
     m_descs_text = Array("Find and replace a character(s).", _
                          "Remove a character(s).", _
                          "Find the substring before a specified character(s)", _
@@ -31,7 +32,11 @@ Sub RegisterUDF_all()
                          "Join a range of strings into a single string.", _
                          "Trim leading spaces.", _
                          "Trim trailing spaces.", _
-                         "Trim leading and trailing spaces." _
+                         "Trim leading and trailing spaces.", _
+						 "Test whether a regular expression pattern has been met.", _
+						 "Replace a string based on a regular expression pattern.", _
+						 "Extract the first text that meets a regular expression pattern.", _
+						 "Extract ALL text that meet a regular expression pattern." _
                         )
                         
     ' funs_lookup

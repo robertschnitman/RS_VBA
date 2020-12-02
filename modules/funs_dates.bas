@@ -3,48 +3,14 @@ Attribute VB_Name = "funs_dates"
 
 ' Author: Robert Schnitman
 ' Date: 2020-11-20
-' Function: WEEKDAYNAME()
+' Function: WEEKDAYN()
 ' Description: Outputs the name of the weekday for a given date.
 
-Function WEEKDAYNAME(date_cell As Date)
-Attribute WEEKDAYNAME.VB_Description = "Outputs the name of the weekday for a given date."
-Attribute WEEKDAYNAME.VB_ProcData.VB_Invoke_Func = " \n25"
-
-    wday = Weekday(date_cell, vbSunday) ' 1 = Sunday
+Function WEEKDAYN(date_cell As Date)
+Attribute WEEKDAYN.VB_Description = "Outputs the name of the weekday for a given date."
+Attribute WEEKDAYN.VB_ProcData.VB_Invoke_Func = " \n23"
     
-    Select Case wday
-    
-        Case 1
-        
-            output = "Sunday"
-            
-        Case 2
-        
-            output = "Monday"
-            
-        Case 3
-            
-            output = "Tuesday"
-            
-        Case 4
-        
-            output = "Wednesday"
-            
-        Case 5
-        
-            output = "Thursday"
-            
-        Case 6
-        
-            output = "Friday"
-            
-        Case 7
-        
-            output = "Saturday"
-            
-    End Select
-    
-    WEEKDAYNAME = output
+    WEEKDAYN = WEEKDAYNAME(date_cell)
 
 End Function
 
@@ -53,11 +19,11 @@ End Function
 ' Function: YMD()
 ' Description: Formats a date value into the ISO standard format ("yyyy-mm-dd").
 
-Function YMD(date_cell As Date)
+Function YMD(date_cell As Date, Optional sep As String = "-")
 Attribute YMD.VB_Description = "Formats a date value into the ISO standard format (yyyy-mm-dd)."
-Attribute YMD.VB_ProcData.VB_Invoke_Func = " \n25"
+Attribute YMD.VB_ProcData.VB_Invoke_Func = " \n23"
 
-    YMD = Format(date_cell, "yyyy-mm-dd")
+    YMD = Format(date_cell, "yyyy" & sep & "mm" & sep & "dd")
 
 End Function
 
@@ -66,11 +32,11 @@ End Function
 ' Function: MDY()
 ' Description: Formats a date value into the month-day-year order ("mm/dd/yyyy").
 
-Function MDY(date_cell As Date)
+Function MDY(date_cell As Date, Optional sep As String = "/")
 Attribute MDY.VB_Description = "Formats a date value into the month-day-year order (mm/dd/yyyy)."
-Attribute MDY.VB_ProcData.VB_Invoke_Func = " \n25"
+Attribute MDY.VB_ProcData.VB_Invoke_Func = " \n23"
 
-    MDY = Format(date_cell, "mm/dd/yyyy")
+    MDY = Format(date_cell, "mm" & sep & "dd" & sep & "yyyy")
 
 End Function
 
@@ -79,11 +45,11 @@ End Function
 ' Function: DMY()
 ' Description: Formats a date value into the day-month-year order ("dd/mm/yyyy").
 
-Function DMY(date_cell As Date)
+Function DMY(date_cell As Date, Optional sep As String = "/")
 Attribute DMY.VB_Description = "Formats a date value into the day-month-year order (dd/mm/yyyy)."
-Attribute DMY.VB_ProcData.VB_Invoke_Func = " \n25"
+Attribute DMY.VB_ProcData.VB_Invoke_Func = " \n23"
 
-    DMY = Format(date_cell, "dd/mm/yyyy")
+    DMY = Format(date_cell, "dd" & sep & "mm" & sep & "yyyy")
 
 End Function
 

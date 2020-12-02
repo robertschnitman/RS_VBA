@@ -8,7 +8,7 @@ Attribute VB_Name = "funs_text"
 
 Function FINDREPLACE(cell As String, string_old As String, string_new As String)
 Attribute FINDREPLACE.VB_Description = "Find and replace a character(s)."
-Attribute FINDREPLACE.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute FINDREPLACE.VB_ProcData.VB_Invoke_Func = " \n22"
     
     ' VBA's Replace() is NOT like Excel's REPLACE()!!! It is simpler.
     FINDREPLACE = Replace(cell, string_old, string_new)
@@ -22,7 +22,7 @@ End Function
 
 Function FINDREMOVE(cell As String, char As String)
 Attribute FINDREMOVE.VB_Description = "Remove a character(s)."
-Attribute FINDREMOVE.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute FINDREMOVE.VB_ProcData.VB_Invoke_Func = " \n22"
 
     FINDREMOVE = FINDREPLACE(cell, char, "")
 
@@ -35,7 +35,7 @@ End Function
 
 Function FINDBEFORE(cell As String, char As String)
 Attribute FINDBEFORE.VB_Description = "Find the substring before a specified character(s)"
-Attribute FINDBEFORE.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute FINDBEFORE.VB_ProcData.VB_Invoke_Func = " \n22"
 
     ' VBA's Instr() is like Excel's Find().
     char_pos = InStr(cell, char)
@@ -61,7 +61,7 @@ End Function
 
 Function FINDAFTER(cell As String, char As String)
 Attribute FINDAFTER.VB_Description = "Find the substring after a specified character(s)"
-Attribute FINDAFTER.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute FINDAFTER.VB_ProcData.VB_Invoke_Func = " \n22"
     
     ' VBA's Instr() is like Excel's Find().
     char_pos = InStr(cell, char)
@@ -87,7 +87,7 @@ End Function
 
 Function FINDBETWEEN(cell As String, char_start As String, char_end As String)
 Attribute FINDBETWEEN.VB_Description = "Find the substring between two characters"
-Attribute FINDBETWEEN.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute FINDBETWEEN.VB_ProcData.VB_Invoke_Func = " \n22"
 
     ' Where does char_start start?
     num_start = InStr(cell, char_start)
@@ -122,7 +122,7 @@ End Function
 
 Function FIRSTNAME(cell As String, Optional name_order As Integer = 1)
 Attribute FIRSTNAME.VB_Description = "Find the first name of a name string."
-Attribute FIRSTNAME.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute FIRSTNAME.VB_ProcData.VB_Invoke_Func = " \n22"
     ' NOTES:
     '   1. name_order options
     '       1 = First Name Last Name
@@ -231,7 +231,7 @@ End Function
 
 Function LASTNAME(cell As String, Optional name_order As Integer = 1)
 Attribute LASTNAME.VB_Description = "Find the last name of a name string."
-Attribute LASTNAME.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute LASTNAME.VB_ProcData.VB_Invoke_Func = " \n22"
     '   1. name_order options
     '       1 = First Name Last Name
     '       2 = Last Name, First Name
@@ -294,7 +294,7 @@ End Function
 
 Function TEXTLIKE(cell As String, ParamArray patterns() As Variant)
 Attribute TEXTLIKE.VB_Description = "Detect a pattern-match for a string."
-Attribute TEXTLIKE.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TEXTLIKE.VB_ProcData.VB_Invoke_Func = " \n22"
     ' ParamArray allows us to give TEXTLIKE() the ability to have multiple inputs without naming them (https://docs.microsoft.com/en-us/office/vba/language/concepts/getting-started/understanding-parameter-arrays).
     
     ' Source of table below: https://docs.microsoft.com/en-us/dotnet/visual-basic/programming-guide/language-features/operators-and-expressions/how-to-match-a-string-against-a-pattern
@@ -338,7 +338,7 @@ End Function
 
 Function TEXTSTRIPWS(cell As String)
 Attribute TEXTSTRIPWS.VB_Description = "Remove all spaces in a string."
-Attribute TEXTSTRIPWS.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TEXTSTRIPWS.VB_ProcData.VB_Invoke_Func = " \n22"
     
     TEXTSTRIPWS = FINDREMOVE(cell, " ")
 
@@ -351,7 +351,7 @@ End Function
 
 Function TEXTINSERT(cell As String, char As String, position As Integer)
 Attribute TEXTINSERT.VB_Description = "Insert a character at a specified position."
-Attribute TEXTINSERT.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TEXTINSERT.VB_ProcData.VB_Invoke_Func = " \n22"
 
     ' The left side of the string should be everything up to just before the specified position.
     sideA = Left(cell, position - 1)
@@ -371,7 +371,7 @@ End Function
 
 Function TEXTREVERSE(cell As String)
 Attribute TEXTREVERSE.VB_Description = "Reverse the order of a string."
-Attribute TEXTREVERSE.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TEXTREVERSE.VB_ProcData.VB_Invoke_Func = " \n22"
 
     TEXTREVERSE = StrReverse(cell) ' e.g. TEXTREVERSE("ABCD") = "DCBA"
 
@@ -384,7 +384,7 @@ End Function
 
 Function TEXTCOMPARE(string1, string2, Optional compare_type As Long = 1, Optional value As Boolean = False)
 Attribute TEXTCOMPARE.VB_Description = "Compare two strings. Based on VBA's StrComp()"
-Attribute TEXTCOMPARE.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TEXTCOMPARE.VB_ProcData.VB_Invoke_Func = " \n22"
 
     ' https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/strcomp-function
     ' compare_type = 1 --> Textual Comparison (ABCD = abcd) -- case insensitivity
@@ -436,7 +436,7 @@ End Function
 
 Function TEXTJOINR(string_range As Range, Optional delimiter As String)
 Attribute TEXTJOINR.VB_Description = "Join a range of strings into a single string."
-Attribute TEXTJOINR.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TEXTJOINR.VB_ProcData.VB_Invoke_Func = " \n22"
 
     TEXTJOINR = Application.WorksheetFunction.TextJoin(delimiter, True, string_range)
 
@@ -449,7 +449,7 @@ End Function
 
 Function TRIML(cell As String)
 Attribute TRIML.VB_Description = "Trim leading spaces."
-Attribute TRIML.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TRIML.VB_ProcData.VB_Invoke_Func = " \n22"
 
     TRIML = LTrim(cell)
     
@@ -462,7 +462,7 @@ End Function
 
 Function TRIMR(cell As String)
 Attribute TRIMR.VB_Description = "Trim trailing spaces."
-Attribute TRIMR.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TRIMR.VB_ProcData.VB_Invoke_Func = " \n22"
 
     TRIMR = RTrim(cell)
     
@@ -475,8 +475,176 @@ End Function
 
 Function TRIMLR(cell As String)
 Attribute TRIMLR.VB_Description = "Trim leading and trailing spaces."
-Attribute TRIMLR.VB_ProcData.VB_Invoke_Func = " \n24"
+Attribute TRIMLR.VB_ProcData.VB_Invoke_Func = " \n22"
 
     TRIMLR = LTrim(RTrim(cell))
 
 End Function
+
+' Author: Robert Schnitman
+' Date 2020-12-01
+' Function: RXLIKE()
+' Description: Test whether a regular expression pattern has been met.
+
+Function RXLIKE(cell As String, pattern As String, Optional ignore_case As Boolean = False)
+
+    ' Make sure you have the regular expressions feature by going to Tools > References in VBA ("Microsoft VBScript Regular Expressions 5.5").
+    ' https://stackoverflow.com/questions/22542834/how-to-use-regular-expressions-regex-in-microsoft-excel-both-in-cell-and-loops
+    
+    ' Setup
+    Dim regex As New RegExp
+    
+    With regex
+    
+        .Global = True
+        .MultiLine = True
+        .IgnoreCase = ignore_case
+        .pattern = pattern
+        
+    End With
+    
+    ' Outputs a Boolean value (TRUE/FALSE)
+    RXLIKE = regex.Test(cell)
+
+End Function
+
+' Author: Robert Schnitman
+' Date 2020-12-01
+' Function: RXREPLACE()
+' Description: Replace a string based on a regular expression pattern.
+
+Function RXREPLACE(string_old As String, string_pattern As String, string_new As String, Optional ignore_case As Boolean = False)
+
+    ' Make sure you have the regular expressions feature by going to Tools > References in VBA ("Microsoft VBScript Regular Expressions 5.5").
+    ' https://stackoverflow.com/questions/22542834/how-to-use-regular-expressions-regex-in-microsoft-excel-both-in-cell-and-loops
+    
+    ' Setup
+    Dim regex As New RegExp
+    
+    With regex
+    
+        .Global = True
+        .MultiLine = True
+        .IgnoreCase = ignore_case
+        .pattern = string_pattern
+        
+    End With
+    
+    ' If the string matches the given pattern, replace it with the new string; otherwise, throw an error.
+    If regex.Test(string_old) = True Then
+    
+        output = regex.Replace(string_old, string_new)
+        
+    Else
+    
+        output = CVErr(xlErrNA)
+        
+    End If
+    
+    RXREPLACE = output
+
+End Function
+
+' Author: Robert Schnitman
+' Date 2020-12-01
+' Function: RXGET()
+' Description: Extract the first text that meets a regular expression pattern.
+
+Function RXGET(cell As String, pattern As String, Optional ignore_case As Boolean = False)
+
+    ' Make sure you have the regular expressions feature by going to Tools > References in VBA ("Microsoft VBScript Regular Expressions 5.5").
+    ' https://stackoverflow.com/questions/22542834/how-to-use-regular-expressions-regex-in-microsoft-excel-both-in-cell-and-loops
+    
+    ' Setup
+    Dim regex As New RegExp
+    
+    With regex
+    
+        .Global = True
+        .MultiLine = True
+        .IgnoreCase = ignore_case
+        .pattern = pattern
+        
+    End With
+    
+    ' If the string matches the pattern, produce the first match; otherwise, throw an error.
+    If regex.Test(cell) = True Then
+    
+       Set matches = regex.Execute(cell)
+       
+       output = matches.Item(0)
+        
+    Else
+    
+        output = CVErr(xlErrNA)
+        
+    End If
+    
+    RXGET = output
+
+End Function
+
+' Author: Robert Schnitman
+' Date 2020-12-01
+' Function: RXGETALL()
+' Description: Extract ALL text that meet a regular expression pattern.
+
+Function RXGETALL(cell As String, pattern As String, Optional sep As String = ",", Optional ignore_case As Boolean = False)
+
+    ' Make sure you have the regular expressions feature by going to Tools > References in VBA ("Microsoft VBScript Regular Expressions 5.5").
+    ' https://stackoverflow.com/questions/22542834/how-to-use-regular-expressions-regex-in-microsoft-excel-both-in-cell-and-loops
+    
+    ' Setup
+    Dim regex As New RegExp
+    
+    With regex
+    
+        .Global = True
+        .MultiLine = True
+        .IgnoreCase = ignore_case
+        .pattern = pattern
+        
+    End With
+    
+    ' Get all matches.
+    Set matches = regex.Execute(cell)
+    
+    ' https://stackoverflow.com/questions/8146485/returning-a-regex-match-in-vba-excel
+
+    ' Join all matches in a single string, separated by a delimiter ("sep").
+    For i = 0 To matches.Count - 1
+    
+        output = output & sep & matches.Item(i)
+        
+    Next
+    
+    ' The concatenation loop above always puts the separator in the first position of the string, so we need to remove it.
+    If Len(output) <> 0 Then
+    
+        output = Right(output, Len(output) - Len(sep))
+        
+    End If
+    
+    RXGETALL = output
+
+
+End Function
+
+' === UNDER CONSTRUCTION === '
+' Author: Robert Schnitman
+' Date 2020-11-20
+' Function: XMLPARSE()
+' Description: Search for the value associated with an XML field.
+
+'Function XMLPARSE(cell As String, field As String)
+
+    'Dim tag_begin, tag_end As String
+    
+    'tag_begin = "<" & field & ">"
+    'tag_end = "</" & field & ">"
+    
+    'output = FINDBETWEEN(cell, field, tag_end)
+
+    'XMLPARSE = FINDREMOVE(output, ">")
+
+'End Function
